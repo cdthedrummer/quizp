@@ -30,7 +30,7 @@ class Question {
 }
 
 // Emojis for attributes
-const attributeIcons = {
+const Map<Attribute, String> attributeIcons = {
   Attribute.strength: '💪',
   Attribute.intelligence: '🧠',
   Attribute.wisdom: '🔮',
@@ -40,7 +40,7 @@ const attributeIcons = {
 };
 
 // Define the questions list
-final List<Question> questions = [
+const List<Question> questions = [
   Question(
     text: 'How do you prefer to learn?',
     options: ['Reading or studying', 'Watching a video', 'Doing it yourself', 'Group setting'],
