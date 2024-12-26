@@ -1,13 +1,40 @@
+import 'package:flutter/material.dart';
+
+enum QuestionType { 
+  singleChoice, 
+  multiChoice, 
+  scale 
+}
+
+enum Attribute {
+  strength,
+  dexterity,
+  constitution,
+  intelligence,
+  wisdom,
+  charisma
+}
+
 class Question {
   final String text;
   final List<String> options;
-  final Map<String, int> attributeScores;
-  final bool isMultiSelect;
-
-  Question({
+  final QuestionType type;
+  final Map<String, Map<Attribute, int>> attributeScores;
+  
+  const Question({
     required this.text,
     required this.options,
+    required this.type,
     required this.attributeScores,
-    this.isMultiSelect = false,
   });
 }
+
+// Emojis for attributes
+const attributeIcons = {
+  Attribute.strength: '💪',
+  Attribute.intelligence: '🧠',
+  Attribute.wisdom: '🔮',
+  Attribute.dexterity: '🎾',
+  Attribute.charisma: '🌟',
+  Attribute.constitution: '🛡️',
+};
