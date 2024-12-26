@@ -111,6 +111,7 @@ class _QuestionCardState extends State<QuestionCard> {
 
   Widget _buildOption(String option) {
     final isSelected = _selectedAnswers.contains(option);
+    final color = Theme.of(context).primaryColor;
 
     if (widget.type == QuestionType.singleChoice) {
       return Container(
@@ -118,10 +119,10 @@ class _QuestionCardState extends State<QuestionCard> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? Theme.of(context).primaryColor : Colors.grey.shade300,
+            color: isSelected ? color : Colors.grey.shade300,
             width: 2,
           ),
-          color: isSelected ? Theme.of(context).primaryColor.withOpacity(0.1) : null,
+          color: isSelected ? color.withAlpha(20) : null,
         ),
         child: RadioListTile<String>(
           title: Text(
@@ -130,13 +131,13 @@ class _QuestionCardState extends State<QuestionCard> {
               fontFamily: 'Quicksand',
               fontSize: 16,
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-              color: isSelected ? Theme.of(context).primaryColor : null,
+              color: isSelected ? color : null,
             ),
           ),
           value: option,
           groupValue: _selectedAnswers.isNotEmpty ? _selectedAnswers.first : null,
           onChanged: (value) => _handleSelection(option, true),
-          activeColor: Theme.of(context).primaryColor,
+          activeColor: color,
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
@@ -147,10 +148,10 @@ class _QuestionCardState extends State<QuestionCard> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? Theme.of(context).primaryColor : Colors.grey.shade300,
+            color: isSelected ? color : Colors.grey.shade300,
             width: 2,
           ),
-          color: isSelected ? Theme.of(context).primaryColor.withOpacity(0.1) : null,
+          color: isSelected ? color.withAlpha(20) : null,
         ),
         child: CheckboxListTile(
           title: Text(
@@ -159,12 +160,12 @@ class _QuestionCardState extends State<QuestionCard> {
               fontFamily: 'Quicksand',
               fontSize: 16,
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-              color: isSelected ? Theme.of(context).primaryColor : null,
+              color: isSelected ? color : null,
             ),
           ),
           value: isSelected,
           onChanged: (value) => _handleSelection(option, value),
-          activeColor: Theme.of(context).primaryColor,
+          activeColor: color,
           checkColor: Colors.white,
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -174,6 +175,8 @@ class _QuestionCardState extends State<QuestionCard> {
   }
 
   Widget _buildScaleOptions() {
+    final color = Theme.of(context).primaryColor;
+    
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: widget.options.map((option) {
@@ -186,15 +189,15 @@ class _QuestionCardState extends State<QuestionCard> {
             height: 72,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: isSelected ? Theme.of(context).primaryColor : Colors.grey.shade100,
+              color: isSelected ? color : Colors.grey.shade100,
               border: Border.all(
-                color: isSelected ? Theme.of(context).primaryColor : Colors.grey.shade300,
+                color: isSelected ? color : Colors.grey.shade300,
                 width: 2,
               ),
               boxShadow: isSelected
                   ? [
                       BoxShadow(
-                        color: Theme.of(context).primaryColor.withOpacity(0.3),
+                        color: color.withAlpha(76),
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),
