@@ -7,7 +7,6 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get the screen size
     final size = MediaQuery.of(context).size;
     final bool isPortrait = size.height > size.width;
 
@@ -33,26 +32,29 @@ class WelcomeScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    '🎮 Level Up Your Life',
+                  Text(
+                    'Discover Yourself',
                     style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 36,
+                      fontWeight: FontWeight.w600,
                       color: Colors.white,
+                      fontFamily: 'Quicksand',
+                      height: 1.2,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: size.height * 0.02),
-                  const Text(
-                    'Discover your real-life character stats',
+                  Text(
+                    'Uncover your hidden skills & talents!',
                     style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white70,
+                      fontSize: 20,
+                      color: Colors.white.withOpacity(0.9),
+                      fontFamily: 'Quicksand',
+                      height: 1.3,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: size.height * 0.04),
-                  // Attribute preview with responsive layout
                   Container(
                     constraints: BoxConstraints(
                       maxWidth: isPortrait ? size.width : size.width * 0.7,
@@ -62,8 +64,10 @@ class WelcomeScreen extends StatelessWidget {
                       runSpacing: 20,
                       alignment: WrapAlignment.center,
                       children: attributeIcons.entries.map((entry) {
+                        String label = entry.key.toString().split('.').last;
+                        // Calculate minimum width needed for text
                         return Container(
-                          width: isPortrait ? size.width * 0.25 : size.width * 0.15,
+                          width: isPortrait ? size.width * 0.28 : size.width * 0.15,
                           child: Column(
                             children: [
                               Text(
@@ -71,12 +75,16 @@ class WelcomeScreen extends StatelessWidget {
                                 style: const TextStyle(fontSize: 24),
                               ),
                               Text(
-                                entry.key.toString().split('.').last.toUpperCase(),
-                                style: const TextStyle(
-                                  color: Colors.white70,
+                                label.toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.9),
                                   fontSize: 12,
+                                  fontFamily: 'Quicksand',
+                                  letterSpacing: 0.5,
                                 ),
                                 textAlign: TextAlign.center,
+                                softWrap: false,
+                                overflow: TextOverflow.visible,
                               ),
                             ],
                           ),
@@ -102,13 +110,15 @@ class WelcomeScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
+                      elevation: 3,
                     ),
                     child: Text(
-                      'Begin Quest',
+                      'Start Journey',
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Quicksand',
                       ),
                     ),
                   ),
