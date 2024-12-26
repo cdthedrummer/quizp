@@ -32,18 +32,16 @@ class WelcomeScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Welcome to your next chapter',
-                    style: TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      fontFamily: 'Quicksand',
-                      height: 1.2,
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: size.width * 0.1,
+                      vertical: size.height * 0.02,
                     ),
-                    textAlign: TextAlign.center,
+                    child: Image.asset(
+                      'assets/images/welcome_title.png',
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                  SizedBox(height: size.height * 0.02),
                   const Text(
                     'Explore untapped talents and gain the edge you\'ve been looking for!',
                     style: TextStyle(
