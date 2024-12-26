@@ -33,7 +33,7 @@ class WelcomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Discover Yourself',
+                    'Welcome to your next chapter',
                     style: TextStyle(
                       fontSize: 36,
                       fontWeight: FontWeight.w600,
@@ -45,7 +45,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.02),
                   Text(
-                    'Uncover your hidden skills & talents!',
+                    'Explore untapped talents and gain the edge you've been looking for!',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white.withOpacity(0.9),
@@ -64,8 +64,11 @@ class WelcomeScreen extends StatelessWidget {
                       runSpacing: 20,
                       alignment: WrapAlignment.center,
                       children: attributeIcons.entries.map((entry) {
+                        // Convert enum to properly formatted string
                         String label = entry.key.toString().split('.').last;
-                        // Calculate minimum width needed for text
+                        // Convert to sentence case
+                        label = label[0].toUpperCase() + label.substring(1).toLowerCase();
+                        
                         return Container(
                           width: isPortrait ? size.width * 0.28 : size.width * 0.15,
                           child: Column(
@@ -75,7 +78,7 @@ class WelcomeScreen extends StatelessWidget {
                                 style: const TextStyle(fontSize: 24),
                               ),
                               Text(
-                                label.toUpperCase(),
+                                label,
                                 style: TextStyle(
                                   color: Colors.white.withOpacity(0.9),
                                   fontSize: 12,
@@ -113,7 +116,7 @@ class WelcomeScreen extends StatelessWidget {
                       elevation: 3,
                     ),
                     child: Text(
-                      'Start Journey',
+                      'Begin quest',
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 20,
