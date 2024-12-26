@@ -3,6 +3,7 @@ import '../controllers/quiz_controller.dart';
 import '../models/question.dart';
 import '../widgets/progress_bar.dart';
 import '../widgets/question_card.dart';
+import 'results_screen.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -11,17 +12,48 @@ class QuizScreen extends StatefulWidget {
   State<QuizScreen> createState() => _QuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateMixin {
   final _controller = QuizController();
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(_animationController);
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   void _handleAnswer(List<String> answers) {
-    setState(() {
-      _controller.submitAnswer(answers);
-      if (_controller.hasNextQuestion) {
-        _controller.nextQuestion();
-      } else {
-        // TODO: Navigate to results screen
-      }
+    _animationController.reverse().then((_) {
+      setState(() {
+        _controller.submitAnswer(answers);
+        if (_controller.hasNextQuestion) {
+          _controller.nextQuestion();
+          _animationController.forward();
+        } else {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => ResultsScreen(
+                scores: _controller.finalScores,
+              ),
+            ),
+          );
+        }
+      });
     });
   }
 
@@ -35,8 +67,8 @@ class _QuizScreenState extends State<QuizScreen> {
           children: [
             ProgressBar(progress: _controller.progress),
             Expanded(
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
+              child: FadeTransition(
+                opacity: _fadeAnimation,
                 child: question.isSplash
                     ? _buildSplashScreen(question)
                     : QuestionCard(
