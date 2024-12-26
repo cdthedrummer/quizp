@@ -32,7 +32,7 @@ class WelcomeScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Welcome to your next chapter',
                     style: TextStyle(
                       fontSize: 36,
@@ -44,18 +44,18 @@ class WelcomeScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: size.height * 0.02),
-                  Text(
-                    'Explore untapped talents and gain the edge you've been looking for!',
+                  const Text(
+                    'Explore untapped talents and gain the edge you\'ve been looking for!',
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.white.withOpacity(0.9),
+                      color: Colors.white70,
                       fontFamily: 'Quicksand',
                       height: 1.3,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: size.height * 0.04),
-                  Container(
+                  ConstrainedBox(
                     constraints: BoxConstraints(
                       maxWidth: isPortrait ? size.width : size.width * 0.7,
                     ),
@@ -64,12 +64,10 @@ class WelcomeScreen extends StatelessWidget {
                       runSpacing: 20,
                       alignment: WrapAlignment.center,
                       children: attributeIcons.entries.map((entry) {
-                        // Convert enum to properly formatted string
                         String label = entry.key.toString().split('.').last;
-                        // Convert to sentence case
                         label = label[0].toUpperCase() + label.substring(1).toLowerCase();
                         
-                        return Container(
+                        return SizedBox(
                           width: isPortrait ? size.width * 0.28 : size.width * 0.15,
                           child: Column(
                             children: [
@@ -79,8 +77,8 @@ class WelcomeScreen extends StatelessWidget {
                               ),
                               Text(
                                 label,
-                                style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
+                                style: const TextStyle(
+                                  color: Colors.white70,
                                   fontSize: 12,
                                   fontFamily: 'Quicksand',
                                   letterSpacing: 0.5,
