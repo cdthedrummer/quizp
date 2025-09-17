@@ -22,24 +22,25 @@ class WelcomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: const SafeArea(
+        child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 16,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 40,
                       vertical: 16,
                     ),
                     child: Text(
                       'Character Builder',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -48,7 +49,7 @@ class WelcomeScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Text(
+                  const Text(
                     'Explore untapped talents and gain the edge you\'ve been looking for!',
                     style: TextStyle(
                       fontSize: 20,
@@ -58,7 +59,38 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 32),
+                  SizedBox(height: isPortrait ? 48 : 32),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const QuizScreen(),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Quicksand',
+                      ),
+                    ),
+                    child: const Text('Begin quest'),
+                  ),
+                  SizedBox(height: isPortrait ? 16 : 8),
+                  const Text(
+                    'You can answer at your own pace and revisit any prompt.',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 14,
+                      fontFamily: 'Quicksand',
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             ),

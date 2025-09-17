@@ -28,7 +28,7 @@ class QuizController {
   // Answer management
   void submitAnswer(List<String> selectedAnswers) {
     _answers[_currentIndex] = selectedAnswers;
-    _updateScores(selectedAnswers);
+    _recalculateScores();
   }
 
   List<String>? getAnswerForQuestion(int index) {
@@ -36,15 +36,22 @@ class QuizController {
   }
 
   // Score calculation
-  void _updateScores(List<String> selectedAnswers) {
-    if (currentQuestion.isSplash) return;
+  void _recalculateScores() {
+    _scores.clear();
 
-    for (final answer in selectedAnswers) {
-      final attributes = currentQuestion.attributeScores[answer] ?? [];
-      for (final attribute in attributes) {
-        _scores[attribute] = (_scores[attribute] ?? 0) + 1;
+    _answers.forEach((index, answers) {
+      if (index < 0 || index >= questions.length) return;
+
+      final question = questions[index];
+      if (question.isSplash) return;
+
+      for (final answer in answers) {
+        final attributes = question.attributeScores[answer] ?? const [];
+        for (final attribute in attributes) {
+          _scores[attribute] = (_scores[attribute] ?? 0) + 1;
+        }
       }
-    }
+    });
   }
 
   Map<Attribute, int> get finalScores => Map.unmodifiable(_scores);
