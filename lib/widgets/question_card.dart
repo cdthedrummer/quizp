@@ -177,16 +177,18 @@ class _QuestionCardState extends State<QuestionCard> {
   Widget _buildScaleOptions() {
     final color = Theme.of(context).primaryColor;
     
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 16,
+      runSpacing: 16,
       children: widget.options.map((option) {
         final isSelected = _selectedAnswers.contains(option);
         return GestureDetector(
           onTap: () => _handleSelection(option, true),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            width: 72,
-            height: 72,
+            width: 64,
+            height: 64,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: isSelected ? color : Colors.grey.shade100,
@@ -209,7 +211,7 @@ class _QuestionCardState extends State<QuestionCard> {
                 option,
                 style: TextStyle(
                   color: isSelected ? Colors.white : Colors.black87,
-                  fontSize: 28,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Quicksand',
                 ),
